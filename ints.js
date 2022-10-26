@@ -1151,6 +1151,7 @@ async function run(){
           if(agent === '00-000-DEV1-FY-8323176701'){
             
                 const url2 = 'https://dialogflow.cloud.google.com/#/agent/newagent-rouw/intents';
+                const page1 = await browser.newPage();
                 await page1.waitForTimeout(5000);
                 await page1.goto(url2, { waitUntil: 'networkidle2', timeout: 0 });
                 await page1.setViewport({ width: 1280, height: 600 })
