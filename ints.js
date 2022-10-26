@@ -593,6 +593,7 @@ async function run(){
               });
               await page1.waitForTimeout(10000);
               let r1 = 'D' + rowNum;
+              console.log(r1)
               await UpdateSheet(r1, 'Intents Update Started');
                 
                 await page1.waitForTimeout(5000);
@@ -696,6 +697,7 @@ async function run(){
                         let txt23 = await page1.evaluate(element => element.textContent, ell242);
                         console.log(txt23)
                         let r2 = 'E' + rowNum;
+                        console.log(r2)
                         await UpdateSheet(r2, txt23);
                         } catch (error) {
                           console.log(error)
@@ -779,6 +781,7 @@ async function run(){
             
                 })()
                 let r3 = 'D' + rowNum;
+                console.log(r3)
                 await UpdateSheet(r3, 'Intents Update Done');
                 //await UpdateSheet('I4', 'Update Complete');
                 //await UpdateSheet('K4', 'Update Complete');
@@ -1194,6 +1197,7 @@ exports.Ints= async (req, res) => {
     }else{ints1 = []}
     console.log(ints1)
     rowNum = dt.rowNum
+    console.log(rowNum)
     run()
     res.status(200).send('ok')
 }
