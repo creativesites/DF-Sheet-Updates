@@ -608,7 +608,7 @@ async function run(){
               await page1.waitForTimeout(10000);
               let r1 = 'D' + rowNum;
               console.log(r1)
-              await UpdateSheet(r1, 'Intents Update Started');
+              //await UpdateSheet(r1, 'Intents Update Started');
                 
                 await page1.waitForTimeout(5000);
                 await (async () => {
@@ -712,7 +712,7 @@ async function run(){
                         console.log(txt23)
                         let r2 = 'E' + rowNum;
                         console.log(r2)
-                        await UpdateSheet(r2, txt23);
+                        //await UpdateSheet(r2, txt23);
                         } catch (error) {
                           console.log(error)
                         }
@@ -772,7 +772,7 @@ async function run(){
                             console.log('selector not found')
                             
                                 console.log(`agent ${el5} not found: skipping`)
-                                await UpdateSheet("I4", `agent ${el5} not found: skipping`);
+                                //await UpdateSheet("I4", `agent ${el5} not found: skipping`);
                                 await page1.waitForXPath('/html/body/div[1]/div[5]/md-dialog/batch-popup/md-toolbar/div/h2');
                                 await page1.waitForTimeout(1000);
                                 let vgh = await page1.$x('/html/body/div[1]/div[5]/md-dialog/batch-popup/md-toolbar/div/h2');
@@ -796,7 +796,7 @@ async function run(){
                 })()
                 let r3 = 'D' + rowNum;
                 console.log(r3)
-                await UpdateSheet(r3, 'Intents Update Done');
+                //await UpdateSheet(r3, 'Intents Update Done');
                 //await UpdateSheet('I4', 'Update Complete');
                 //await UpdateSheet('K4', 'Update Complete');
                 await page1.waitForTimeout(5000);
@@ -1102,7 +1102,7 @@ async function run(){
             let txt234 = await page1.evaluate(element => element.textContent, agg1);
             console.log(txt234)
             let r4 = 'F' + rowNum;
-            await UpdateSheet(r4, txt234);
+            //await UpdateSheet(r4, txt234);
 
               await page1.waitForSelector('aria/START', {
                   timeout: 5000
@@ -1147,7 +1147,7 @@ async function run(){
           //entities
           console.log('STARTING ENTITIES')
           let r5 = 'D' + rowNum;
-          await UpdateSheet(r5, 'Entities Update Started');
+          //await UpdateSheet(r5, 'Entities Update Started');
           if(agent === '00-000-DEV1-FY-8323176701'){
             
                 const url2 = 'https://dialogflow.cloud.google.com/#/agent/newagent-rouw/intents';
@@ -1177,7 +1177,7 @@ async function run(){
                 //func
                 await runEntities();
                 let r6 = 'D' + rowNum;
-                await UpdateSheet(r6, 'Entities Update Done');
+                //await UpdateSheet(r6, 'Entities Update Done');
                 await page1.waitForTimeout(10000);
                 
            
