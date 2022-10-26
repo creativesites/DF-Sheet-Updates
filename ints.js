@@ -29,7 +29,7 @@ async function UpdateSheet(cell, cellVal){
   
   const sheet = doc.sheetsByTitle['UpdateDF'];
   console.log(sheet.title);
-  await sheet.loadCells('G4:J4');
+  //await sheet.loadCells('G4:J4');
   const c6 = await sheet.getCellByA1(cell);
   c6.value = cellVal
   await sheet.saveUpdatedCells();
@@ -592,7 +592,7 @@ async function run(){
                 waitUntil: ["networkidle0", "domcontentloaded"]
               });
               await page1.waitForTimeout(10000);
-              let r1 = 'D' + rowNum.toString();
+              let r1 = 'D' + rowNum;
               await UpdateSheet(r1, 'Intents Update Started');
                 
                 await page1.waitForTimeout(5000);
@@ -694,7 +694,7 @@ async function run(){
                         await ell241[0].click()
                         let [ell242] = await page1.$x(`/html/body/div[1]/div[5]/md-dialog/batch-popup/md-dialog-content/div/md-input-container[1]/md-checkbox/div[1]`);
                         let txt23 = await page1.evaluate(element => element.textContent, ell242);
-                        let r2 = 'E' + rowNum.toString();
+                        let r2 = 'E' + rowNum;
                         await UpdateSheet(r2, txt23);
                         } catch (error) {
                           console.log(error)
@@ -777,7 +777,7 @@ async function run(){
                   }
             
                 })()
-                let r3 = 'D' + rowNum.toString();
+                let r3 = 'D' + rowNum;
                 await UpdateSheet(r3, 'Intents Update Done');
                 //await UpdateSheet('I4', 'Update Complete');
                 //await UpdateSheet('K4', 'Update Complete');
@@ -1082,7 +1082,7 @@ async function run(){
             await page1.waitForTimeout(2000);
             await agg[0].click()
             let txt234 = await page1.evaluate(element => element.textContent, agg1);
-            let r4 = 'F' + rowNum.toString();
+            let r4 = 'F' + rowNum;
             await UpdateSheet(r4, txt234);
 
               await page1.waitForSelector('aria/START', {
@@ -1127,7 +1127,7 @@ async function run(){
      async function Entities(){
           //entities
           console.log('STARTING ENTITIES')
-          let r5 = 'D' + rowNum.toString();
+          let r5 = 'D' + rowNum;
           await UpdateSheet(r5, 'Entities Update Started');
           if(agent === '00-000-DEV1-FY-8323176701'){
             
@@ -1157,7 +1157,7 @@ async function run(){
                 await page1.waitForTimeout(5000);
                 //func
                 await runEntities();
-                let r6 = 'D' + rowNum.toString();
+                let r6 = 'D' + rowNum;
                 await UpdateSheet(r6, 'Entities Update Done');
                 await page1.waitForTimeout(10000);
                 
