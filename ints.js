@@ -29,7 +29,7 @@ async function UpdateSheet(cell, cellVal){
   
   const sheet = doc.sheetsByTitle['UpdateDF'];
   console.log(sheet.title);
-  //await sheet.loadCells('G4:J4');
+  await sheet.loadCells('D4:F100');
   const c6 = await sheet.getCellByA1(cell);
   c6.value = cellVal
   await sheet.saveUpdatedCells();
