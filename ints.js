@@ -17,6 +17,20 @@ let rowNum = 2;
 let onNextPage = false;
 let onNextPage1 = false;
 dotenv.config();
+(async () => {
+  await doc.useServiceAccountAuth({
+    client_email: CREDENTIALS.client_email,
+    private_key: CREDENTIALS.private_key
+  });
+
+  // load the documents info
+  await doc.loadInfo();
+
+  
+  const sheet = doc.sheetsByTitle['B1-Updates'];
+  console.log(sheet.title);
+  await sheet.loadCells('D4:F100');
+})();
 async function UpdateSheet(cell, cellVal){
   await doc.useServiceAccountAuth({
     client_email: CREDENTIALS.client_email,
