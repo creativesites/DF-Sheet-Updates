@@ -1196,19 +1196,233 @@ async function run(){
       await Entities();
      }
 }
+let ez = [
+  {
+    "name": "aWordsOperator",
+    "index": 1
+  },
+  {
+    "name": "aWordsUnhandled",
+    "index": 2
+  },
+  {
+    "name": "aWordsVoicemail",
+    "index": 3
+  },
+  {
+    "name": "carMake",
+    "index": 4
+  },
+  {
+    "name": "carMakeAll",
+    "index": 5
+  },
+  {
+    "name": "carMakeAllLessCurrent",
+    "index": 6
+  },
+  {
+    "name": "carModels",
+    "index": 7
+  },
+  {
+    "name": "FAQ",
+    "index": 8
+  },
+  {
+    "name": "serviceOptions",
+    "index": 9
+  },
+  {
+    "name": "serviceOptions000",
+    "index": 10
+  },
+  {
+    "name": "transportation",
+    "index": 11
+  },
+  {
+    "name": "wordsAfternoon",
+    "index": 12
+  },
+  {
+    "name": "wordsAppointment",
+    "index": 13
+  },
+  {
+    "name": "wordsCarYear",
+    "index": 14
+  },
+  {
+    "name": "wordsChangeAppt",
+    "index": 15
+  },
+  {
+    "name": "wordsDropIn",
+    "index": 16
+  },
+  {
+    "name": "wordsEvening",
+    "index": 17
+  },
+  {
+    "name": "wordsExceptions",
+    "index": 18
+  },
+  {
+    "name": "wordsIssues",
+    "index": 19
+  },
+  {
+    "name": "wordsNext",
+    "index": 20
+  },
+  {
+    "name": "wordsNo",
+    "index": 21
+  },
+  {
+    "name": "wordsNo",
+    "index": 22
+  },
+  {
+    "name": "wordsNoAppointment",
+    "index": 23
+  },
+  {
+    "name": "wordsNotSure",
+    "index": 24
+  },
+  {
+    "name": "wordsOddHours",
+    "index": 25
+  },
+  {
+    "name": "wordsOperator",
+    "index": 26
+  },
+  {
+    "name": "wordsOther",
+    "index": 27
+  },
+  {
+    "name": "wordsParts",
+    "index": 28
+  },
+  {
+    "name": "wordsPre",
+    "index": 29
+  },
+  {
+    "name": "wordsQuote",
+    "index": 30
+  },
+  {
+    "name": "wordsRecall",
+    "index": 31
+  },
+  {
+    "name": "wordsRepair",
+    "index": 32
+  },
+  {
+    "name": "wordsSales",
+    "index": 33
+  },
+  {
+    "name": "wordsSearchAppt",
+    "index": 34
+  },
+  {
+    "name": "wordsService",
+    "index": 35
+  },
+  {
+    "name": "wordsStatus",
+    "index": 36
+  },
+  {
+    "name": "wordsTakeIt",
+    "index": 37
+  },
+  {
+    "name": "wordsTime",
+    "index": 38
+  },
+  {
+    "name": "wordsTransport",
+    "index": 39
+  },
+  {
+    "name": "wordsVague",
+    "index": 40
+  },
+  {
+    "name": "wordsYes",
+    "index": 41
+  }
+]
+let iz = [
+  {
+    "name": "1-Voicemail",
+    "index": 1
+  },
+  {
+    "name": "2-ScheduleAppt",
+    "index": 2
+  },
+  {
+    "name": "3-GetYMM",
+    "index": 3
+  },
+  {
+    "name": "4-GetServices",
+    "index": 4
+  },
+  {
+    "name": "4-Transport",
+    "index": 5
+  },
+  {
+    "name": "5-Recalls",
+    "index": 6
+  },
+  {
+    "name": "5-Recalls",
+    "index": 7
+  },
+  {
+    "name": "7-Book",
+    "index": 8
+  }
+]
 exports.Ints= async (req, res) => {
     let dt = req.body
     console.log(JSON.stringify(dt))
     entsNum = dt.entities.length;
     console.log(entsNum);
     if(dt.entities.length > 0){
-      ents = dt.entities.split(',')
+      let saw = dt.entities.split(',')
+      ents = saw.map((x) => {
+        // find if x is in ez
+        let found = ez.find((y) => {
+            return y.name === x 
+        })
+        return found.index
+      })
     }else{ents = []}
     console.log(ents);
     intsNum = dt.intents.length
     console.log(intsNum)
     if(dt.intents.length > 0){
-      ints1 = dt.intents.split(',');
+      let siw = dt.intents.split(',');
+      ints1 = siw.map((x) => {
+        // find if x is in iz
+        let found = iz.find((y) => {
+            return y.name === x
+        })
+        return found.index
+      })
     }else{ints1 = []}
     console.log(ints1)
     rowNum = dt.rowNum
