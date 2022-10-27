@@ -726,13 +726,14 @@ async function run(){
                         await ell241[0].click()
                         let [ell242] = await page1.$x(`/html/body/div[1]/div[5]/md-dialog/batch-popup/md-dialog-content/div/md-input-container[1]/md-checkbox/div[1]`);
                         let txt23 = await page1.evaluate(element => element.textContent, ell242);
+                        txt23 = txt23.substring(0, txt23.length - 4);
                         console.log(txt23)
                         let r2 = 'E' + rowNum;
                         console.log(r2)
                         let c7 = await sheet.getCellByA1(r2);
                         c7.value = txt23;
                         await sheet.saveUpdatedCells();
-                        console.log('update written to sheet')
+                        console.log('agent written to sheet')
                         //await UpdateSheet(r2, txt23);
                         } catch (error) {
                           console.log(error)
@@ -1149,7 +1150,7 @@ async function run(){
             let c10 = await sheet.getCellByA1(r4);
             c10.value = txt234
             await sheet.saveUpdatedCells();
-            console.log('update written to sheet')
+            console.log('agent written to sheet')
             //await UpdateSheet(r4, txt234);
 
               await page1.waitForSelector('aria/START', {
