@@ -196,27 +196,18 @@ async function run() {
                                       try {
 
                                         await page1.waitForTimeout(1000);
-                                        const heading1 = await page.$eval(
-                                            '#select_option_1770 > div.md-text.ng-binding',
-                                            (el) => el.textContent
-                                          )
-                                          console.log(0)
-                                          console.log(heading1)
-                                        await page1.waitForSelector('#select_option_1770 > div.md-text.ng-binding')
-                                        await page1.waitForTimeout(1000);
-                                        let asd = await page1.$('#select_option_1770 > div.md-text.ng-binding')
-                                        let asd2 = await page1.evaluate(el => el.textContent, asd);
-                                        console.log(1)
-                                        console.log(asd2)
-                                        
-                                      } catch (error) {
-                                        console.log(error)
                                         await page1.waitForXPath('/html/body/div[1]/div[5]/md-dialog/batch-popup/md-dialog-content/div/div/md-input-container/md-select/md-select-value/span[1]/div')
                                         let [ell242] = await page1.$x(`/html/body/div[1]/div[5]/md-dialog/batch-popup/md-dialog-content/div/div/md-input-container/md-select/md-select-value/span[1]/div`);
                                         await page1.waitForTimeout(2000);
                                         let txt23 = await page1.evaluate(element => element.textContent, ell242);
+                                        // remove last 4 characters
+                                        txt23 = txt23.substring(0, txt23.length - 4);
                                         console.log(2)
                                         console.log(txt23)
+                                        
+                                      } catch (error) {
+                                        console.log(error)
+                                        
                                       }
                                       //copy intents
                                       await page1.waitForSelector('aria/START', {

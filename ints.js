@@ -754,6 +754,22 @@ async function run(){
                                 let agntToUpdate = await page1.$x(`/html/body/div[3]/md-select-menu/md-content/md-option[${el5}]`)
                                 await page1.waitForTimeout(1000);
                                 await agntToUpdate[0].click()
+                                try {
+
+                                  await page1.waitForTimeout(1000);
+                                  await page1.waitForXPath('/html/body/div[1]/div[5]/md-dialog/batch-popup/md-dialog-content/div/div/md-input-container/md-select/md-select-value/span[1]/div')
+                                  let [ell242] = await page1.$x(`/html/body/div[1]/div[5]/md-dialog/batch-popup/md-dialog-content/div/div/md-input-container/md-select/md-select-value/span[1]/div`);
+                                  await page1.waitForTimeout(2000);
+                                  let txt23 = await page1.evaluate(element => element.textContent, ell242);
+                                  // remove last 4 characters
+                                  txt23 = txt23.substring(0, txt23.length - 4);
+                                  console.log(2)
+                                  console.log(txt23)
+                                  
+                                } catch (error) {
+                                  console.log(error)
+                                  
+                                }
                                 //copy intents
                                 await page1.waitForSelector('aria/START', {
                                     timeout: 5000
@@ -1096,10 +1112,13 @@ async function run(){
           try {
             await page1.waitForXPath(`/html/body/div[3]/md-select-menu/md-content/md-option[${index}]`)
             let agg = await page1.$x(`/html/body/div[3]/md-select-menu/md-content/md-option[${index}]`)
-            let [agg1] = await page1.$x(`/html/body/div[3]/md-select-menu/md-content/md-option[${index}]`)
+            // /html/body/div[1]/div[5]/md-dialog/batch-popup/md-dialog-content/div/div/md-input-container/md-select/md-select-value/span[1]/div
+            let [agg1] = await page1.$x(`/html/body/div[1]/div[5]/md-dialog/batch-popup/md-dialog-content/div/div/md-input-container/md-select/md-select-value/span[${index}]/div`)
             await page1.waitForTimeout(2000);
             await agg[0].click()
             let txt234 = await page1.evaluate(element => element.textContent, agg1);
+            // remove last 4 characters
+            txt234 = txt234.substring(0, txt234.length - 4);
             console.log(txt234)
             let r4 = 'F' + rowNum;
             //await UpdateSheet(r4, txt234);
