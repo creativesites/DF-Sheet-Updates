@@ -149,9 +149,9 @@ async function run() {
                               await ell241[0].click()
                               try {
                                 await page1.waitForTimeout(1000);
-                                await page1.waitForSelector('#select_value_label_1767 > span:nth-child(1) > div')
+                                await page1.waitForSelector('#select_option_1770 > div.md-text.ng-binding')
                                 await page1.waitForTimeout(1000);
-                                let asd = await page1.$('#select_value_label_1767 > span:nth-child(1) > div')
+                                let asd = await page1.$('#select_option_1770 > div.md-text.ng-binding')
                                 let asd2 = await page1.evaluate(el => el.textContent, asd);
                                 console.log(asd2)
                               } catch (error) {
