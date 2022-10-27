@@ -1408,7 +1408,8 @@ exports.Ints= async (req, res) => {
         let found = ez.find((y) => {
             return y.name === x 
         })
-        return found.index
+        let r = found.index
+        return r
       })
     }else{ents = []}
     console.log(ents);
@@ -1421,7 +1422,8 @@ exports.Ints= async (req, res) => {
         let found = iz.find((y) => {
             return y.name === x
         })
-        return found.index
+        let r = found.index
+        return r
       })
     }else{ints1 = []}
     console.log(ints1)
