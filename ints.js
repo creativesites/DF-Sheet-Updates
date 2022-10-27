@@ -586,7 +586,18 @@ async function run(){
     '--disable-features=IsolateOrigins,site-per-process'
   ] });
   
+  await doc.useServiceAccountAuth({
+    client_email: CREDENTIALS.client_email,
+    private_key: CREDENTIALS.private_key
+  });
+
+  // load the documents info
+  await doc.loadInfo();
+
   
+  const sheet = doc.sheetsByTitle['B1-Updates'];
+  console.log(sheet.title);
+  await sheet.loadCells('D2:F100');
     const page = await browser.newPage();
     const pages = await browser.pages();
     pages[0].close();
@@ -596,6 +607,8 @@ async function run(){
       try {
         //https://dialogflow.cloud.google.com/#/agent/newagent-rouw/intents
         if(agent === '00-000-DEV1-FY-8323176701'){
+          
+          
             console.log('STARTING INTENTS')
             const url2 = 'https://dialogflow.cloud.google.com/#/agent/newagent-rouw/intents';
             const page1 = await browser.newPage();
@@ -608,6 +621,10 @@ async function run(){
               await page1.waitForTimeout(10000);
               let r1 = 'D' + rowNum;
               console.log(r1)
+              let c6 = await sheet.getCellByA1(r1);
+              c6.value = 'Intents Update Started'
+              await sheet.saveUpdatedCells();
+              console.log('update written to sheet')
               //await UpdateSheet(r1, 'Intents Update Started');
                 
                 await page1.waitForTimeout(5000);
@@ -712,6 +729,10 @@ async function run(){
                         console.log(txt23)
                         let r2 = 'E' + rowNum;
                         console.log(r2)
+                        let c7 = await sheet.getCellByA1(r2);
+                        c7.value = txt23;
+                        await sheet.saveUpdatedCells();
+                        console.log('update written to sheet')
                         //await UpdateSheet(r2, txt23);
                         } catch (error) {
                           console.log(error)
@@ -812,6 +833,10 @@ async function run(){
                 })()
                 let r3 = 'D' + rowNum;
                 console.log(r3)
+                let c9 = await sheet.getCellByA1(r3);
+                c9.value = 'Intents Update Done';
+                await sheet.saveUpdatedCells();
+                console.log('update written to sheet')
                 //await UpdateSheet(r3, 'Intents Update Done');
                 //await UpdateSheet('I4', 'Update Complete');
                 //await UpdateSheet('K4', 'Update Complete');
@@ -1121,6 +1146,10 @@ async function run(){
             txt234 = txt234.substring(0, txt234.length - 4);
             console.log(txt234)
             let r4 = 'F' + rowNum;
+            let c10 = await sheet.getCellByA1(r4);
+            c10.value = txt234
+            await sheet.saveUpdatedCells();
+            console.log('update written to sheet')
             //await UpdateSheet(r4, txt234);
 
               await page1.waitForSelector('aria/START', {
@@ -1166,6 +1195,10 @@ async function run(){
           //entities
           console.log('STARTING ENTITIES')
           let r5 = 'D' + rowNum;
+          let c11 = await sheet.getCellByA1(r5);
+          c11.value = 'Entities Update Started'
+          await sheet.saveUpdatedCells();
+          console.log('update written to sheet')
           //await UpdateSheet(r5, 'Entities Update Started');
           if(agent === '00-000-DEV1-FY-8323176701'){
             
@@ -1197,6 +1230,10 @@ async function run(){
                 //func
                 await runEntities();
                 let r6 = 'D' + rowNum;
+                let c12 = await sheet.getCellByA1(r6);
+                c12.value = 'Entities Update Done'
+                await sheet.saveUpdatedCells();
+                console.log('update written to sheet')
                 //await UpdateSheet(r6, 'Entities Update Done');
                 await page1.waitForTimeout(10000);
                 
