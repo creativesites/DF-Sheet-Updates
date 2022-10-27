@@ -147,10 +147,21 @@ async function run() {
                               await page1.waitForTimeout(1000);
                               let ell241 = await page1.$x(`/html/body/div[1]/div[5]/md-dialog/batch-popup/md-dialog-content/div/md-input-container[1]/md-checkbox/div[1]`);
                               await ell241[0].click()
-                              let [ell242] = await page1.$x(`/html/body/div[1]/div[5]/md-dialog/batch-popup/md-dialog-content/div/div/md-input-container/md-select/md-select-value/span[1]/div`);
-                              await page1.waitForTimeout(2000);
-                              let txt23 = await page1.evaluate(element => element.textContent, ell242);
-                              console.log(txt23)
+                              try {
+                                await page1.waitForTimeout(1000);
+                                await page1.waitForSelector('#select_value_label_1767 > span:nth-child(1) > div')
+                                await page1.waitForTimeout(1000);
+                                let asd = await page1.$('#select_value_label_1767 > span:nth-child(1) > div')
+                                let asd2 = await page1.evaluate(el => el.textContent, asd);
+                                console.log(asd2)
+                              } catch (error) {
+                                console.log('no text')
+                                let [ell242] = await page1.$x(`/html/body/div[1]/div[5]/md-dialog/batch-popup/md-dialog-content/div/div/md-input-container/md-select/md-select-value/span[1]/div`);
+                                await page1.waitForTimeout(2000);
+                                let txt23 = await page1.evaluate(element => element.textContent, ell242);
+                                console.log(txt23)
+                              }
+                              
                               let r2 = 'E' + rowNum;
                               console.log(r2)
                               //await UpdateSheet(r2, txt23);
