@@ -1403,6 +1403,8 @@ exports.Ints= async (req, res) => {
     console.log(entsNum);
     if(dt.entities.length > 0){
       let saw = dt.entities.split(',')
+      // remove empty spaces at beggining and end of string
+      saw = saw.map(function (x) { return x.trim(); });
       ents = saw.map((x) => {
         // find if x is in ez
         let found = ez.find((y) => {
@@ -1417,6 +1419,7 @@ exports.Ints= async (req, res) => {
     console.log(intsNum)
     if(dt.intents.length > 0){
       let siw = dt.intents.split(',');
+      siw = siw.map(function (x) { return x.trim(); });
       ints1 = siw.map((x) => {
         // find if x is in iz
         let found = iz.find((y) => {
