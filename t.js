@@ -147,7 +147,7 @@ async function run() {
                               await page1.waitForTimeout(1000);
                               let ell241 = await page1.$x(`/html/body/div[1]/div[5]/md-dialog/batch-popup/md-dialog-content/div/md-input-container[1]/md-checkbox/div[1]`);
                               await ell241[0].click()
-                              let [ell242] = await page1.$x(`/html/body/div[1]/div[5]/md-dialog/batch-popup/md-dialog-content/div/md-input-container[1]/md-checkbox/div[1]`);
+                              let [ell242] = await page1.$x(`/html/body/div[1]/div[5]/md-dialog/batch-popup/md-dialog-content/div/div/md-input-container/md-select/md-select-value/span[1]/div`);
                               let txt23 = await page1.evaluate(element => element.textContent, ell242);
                               console.log(txt23)
                               let r2 = 'E' + rowNum;
