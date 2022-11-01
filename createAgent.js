@@ -38,6 +38,9 @@ async function createAgents(){
     await page.waitForTimeout(15000);
     async function runCreate(){
         for (let index = 0; index < agentNames.length; index++) {
+            const rt = agentNames[index];
+            
+            console.log(newAgentName);
             let newAgentName = rt.newAgentName;
             let cell = rt.cell;
             let r4 = 'B' + cell;
@@ -45,9 +48,7 @@ async function createAgents(){
             c10.value = 'Started';
             await sheet.saveUpdatedCells();
             console.log('agent written to sheet')
-            const rt = agentNames[index];
             
-            console.log(newAgentName);
             await page.waitForSelector('#agents-dropdown-toggle > span.icon-right.icon-caret', {
                 timeout: 5000
             });
