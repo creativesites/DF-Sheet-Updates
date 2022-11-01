@@ -6,7 +6,7 @@ const CREDENTIALS = require('./sheets.json');
 const RESPONSES_SHEET_ID = '1gza3a05wWV4bt7c9pMyJsm43hpbCpPx84Uctym2zjOg';
 const doc = new GoogleSpreadsheet(RESPONSES_SHEET_ID);
 dotenv.config();
-let agentNames = [];
+let agentNames =  []
 async function createAgents(){
     const browser = await puppeteer.launch({ 
         headless: false, 
@@ -38,14 +38,15 @@ async function createAgents(){
     await page.waitForTimeout(15000);
     async function runCreate(){
         for (let index = 0; index < agentNames.length; index++) {
+            let newAgentName = rt.newAgentName;
+            let cell = rt.cell;
             let r4 = 'B' + cell;
             let c10 = await sheet.getCellByA1(r4);
             c10.value = 'Started';
             await sheet.saveUpdatedCells();
             console.log('agent written to sheet')
             const rt = agentNames[index];
-            let newAgentName = rt.newAgentName;
-            let cell = rt.cell;
+            
             console.log(newAgentName);
             await page.waitForSelector('#agents-dropdown-toggle > span.icon-right.icon-caret', {
                 timeout: 5000
@@ -62,21 +63,21 @@ async function createAgents(){
             await page.waitForSelector('#entity-name')
             // type agent name
             await page.type('#entity-name', newAgentName);
-            await page.waitForTimeout(1000);
-            await page.waitForSelector('#select_value_label_372 > span.md-select-icon')
-            await page.waitForTimeout(1000);
-            console.log('selecting timezone')
-            await page.click('#select_value_label_372 > span.md-select-icon');
-            await page.waitForTimeout(1000);
-            try {
-                await page.waitForSelector('aria/(GMT-8:00) America/Los_Angeles')
-                await page.waitForTimeout(1000);
-                await page.click('aria/(GMT-8:00) America/Los_Angeles');
-            } catch (error) {
-                await page.waitForSelector('#select_option_385 > div');
-                await page.waitForTimeout(1000);
-                await page.click('#select_option_385 > div');
-            }
+            // await page.waitForTimeout(1000);
+            // await page.waitForSelector('#select_value_label_372 > span.md-select-icon')
+            // await page.waitForTimeout(1000);
+            // console.log('selecting timezone')
+            // await page.click('#select_value_label_372 > span.md-select-icon');
+            // await page.waitForTimeout(1000);
+            // try {
+            //     await page.waitForSelector('aria/(GMT-8:00) America/Los_Angeles')
+            //     await page.waitForTimeout(1000);
+            //     await page.click('aria/(GMT-8:00) America/Los_Angeles');
+            // } catch (error) {
+            //     await page.waitForSelector('#select_option_385 > div');
+            //     await page.waitForTimeout(1000);
+            //     await page.click('#select_option_385 > div');
+            // }
             await page.waitForSelector('#multi-button');
             await page.waitForTimeout(1000);
             console.log('selecting create button')
@@ -101,7 +102,7 @@ async function createAgents(){
     await page.waitForTimeout(5000);
     await browser.close();
 }
-
+//createAgents();
 exports.Create = async (req, res) => {
     agentNames = req.body.agentNames;
     console.log(agentNames);
