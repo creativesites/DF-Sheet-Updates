@@ -1,5 +1,10 @@
 const puppeteer = require('puppeteer');
 const dotenv = require('dotenv');
+const moment = require('moment');
+const { GoogleSpreadsheet } = require('google-spreadsheet');
+const CREDENTIALS = require('./sheets.json');
+const RESPONSES_SHEET_ID = '1gza3a05wWV4bt7c9pMyJsm43hpbCpPx84Uctym2zjOg';
+const doc = new GoogleSpreadsheet(RESPONSES_SHEET_ID);
 dotenv.config();
 let agentNames = [];
 async function createAgents(){
@@ -10,7 +15,18 @@ async function createAgents(){
         '--disable-features=IsolateOrigins,site-per-process'
     ] });
     
+    await doc.useServiceAccountAuth({
+        client_email: CREDENTIALS.client_email,
+        private_key: CREDENTIALS.private_key
+      });
     
+      // load the documents info
+      await doc.loadInfo();
+    
+      
+      const sheet = doc.sheetsByTitle['createAgents'];
+      console.log(sheet.title);
+      await sheet.loadCells('B2:D500');
     const page = await browser.newPage();
     const pages = await browser.pages();
     pages[0].close();
@@ -22,7 +38,14 @@ async function createAgents(){
     await page.waitForTimeout(15000);
     async function runCreate(){
         for (let index = 0; index < agentNames.length; index++) {
-            const newAgentName = agentNames[index];
+            let r4 = 'B' + cell;
+            let c10 = await sheet.getCellByA1(r4);
+            c10.value = 'Started';
+            await sheet.saveUpdatedCells();
+            console.log('agent written to sheet')
+            const rt = agentNames[index];
+            let newAgentName = rt.newAgentName;
+            let cell = rt.cell;
             await page.waitForSelector('#agents-dropdown-toggle > span.icon-right.icon-caret', {
                 timeout: 5000
             });
@@ -57,6 +80,19 @@ async function createAgents(){
             await page.waitForTimeout(1000);
             console.log('selecting create button')
             await page.click('#multi-button');
+            let date = moment().format('MM/DD/YYYY');
+            let time = moment().format('h:mm');
+            let r43 = 'B' + cell;
+            let r42 = 'C' + cell;
+            let r41 = 'D' + cell;
+            let c101 = await sheet.getCellByA1(r41);
+            let c102 = await sheet.getCellByA1(r42);
+            let c103 = await sheet.getCellByA1(r43);
+            c101.value = time;
+            c102.value = date;
+            c103.value = 'Completed';
+            await sheet.saveUpdatedCells();
+            console.log('agent written to sheet')
             await page.waitForTimeout(5000);
         }
     }
