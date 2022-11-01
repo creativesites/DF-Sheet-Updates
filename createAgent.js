@@ -46,6 +46,7 @@ async function createAgents(){
             const rt = agentNames[index];
             let newAgentName = rt.newAgentName;
             let cell = rt.cell;
+            console.log(newAgentName);
             await page.waitForSelector('#agents-dropdown-toggle > span.icon-right.icon-caret', {
                 timeout: 5000
             });
