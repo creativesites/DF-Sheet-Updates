@@ -630,7 +630,7 @@ async function run(){
                 await page1.waitForTimeout(5000);
                 await (async () => {
                   await page1.waitForTimeout(10000);
-                  for (let idx = 1; idx < 2; idx++) {
+                  for (let idx = 1; idx < 48; idx++) {
                     const el5 = idx;
                     console.log(`Updating ${el5} Intents`)
                     try {
@@ -859,7 +859,7 @@ async function run(){
     async function runEntities(){
       await (async () => {
         await page1.waitForTimeout(5000)
-          for (let index = 1; index < 2; index++) {
+          for (let index = 1; index < 48; index++) {
           let el4 = index;
           console.log(`Updating ${el4} Entities`)
         
