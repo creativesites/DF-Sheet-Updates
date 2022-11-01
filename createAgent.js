@@ -104,7 +104,9 @@ async function createAgents(){
 }
 //createAgents();
 exports.Create = async (req, res) => {
-    agentNames = req.body.agentNames;
+    agentNames = req.body;
     console.log(agentNames);
+    res.status(200).send('ok');
+
     await createAgents();
 }
