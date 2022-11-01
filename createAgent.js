@@ -39,9 +39,8 @@ async function createAgents(){
     async function runCreate(){
         for (let index = 0; index < agentNames.length; index++) {
             const rt = agentNames[index];
-            
-            console.log(newAgentName);
             let newAgentName = rt.newAgentName;
+            console.log(newAgentName);
             let cell = rt.cell;
             let r4 = 'B' + cell;
             let c10 = await sheet.getCellByA1(r4);
